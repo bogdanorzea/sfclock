@@ -9,7 +9,7 @@ The customisation webpage was based on Slate from https://github.com/pebble/slat
 
 The font used is made by Nathan McArthur from http://www.dafont.com/other-f.font.
 
-This project was made for CS50x 2015 Final Project by Bogdan Orzea. 
+This watchface was made for CS50x 2015 Final Project by Bogdan Orzea. 
 
 
 ##Licence
