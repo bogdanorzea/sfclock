@@ -1,0 +1,65 @@
+{
+    "appKeys": {
+        "KEY_BACKGROUND_COLOR": 3,
+        "KEY_BACKGROUND_DISCONNECT_COLOR": 5,
+        "KEY_BATTERY_PERCENT": 9,
+        "KEY_BATTERY_VISIBLE": 8,
+        "KEY_CONDITIONS": 1,
+        "KEY_CUSTOM_TEXT_VISIBLE": 18,
+        "KEY_CUSTOM_TEXT_VALUE": 19,
+        "KEY_FONT_COLOR": 4,
+        "KEY_FONT_DISCONNECT_COLOR": 6,
+        "KEY_MILITARY_TIME": 7,
+        "KEY_TEMPERATURE": 0,
+        "KEY_VIBRATE_DISCONNECT": 16,
+        "KEY_VIBRATE_DISCONNECT_STYLE": 17,
+        "KEY_VIBRATE_HOURLY": 10,
+        "KEY_VIBRATE_HOURLY_STYLE": 15,
+        "KEY_VIBRATE_MAX_DAY": 14,
+        "KEY_VIBRATE_MAX_TIME": 12,
+        "KEY_VIBRATE_MIN_DAY": 13,
+        "KEY_VIBRATE_MIN_TIME": 11,
+        "KEY_VISUAL_DISCONNECT": 20,
+        "KEY_WEATHER_VISIBLE": 2
+
+    },
+    "capabilities": [
+        "location",
+        "configurable"
+    ],
+    "companyName": "Bogdan Orzea",
+    "longName": "StraightFontClock",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "fonts/other_f_text_small.ttf",
+                "name": "OTHER_FONT_20",
+                "targetPlatforms": null,
+                "type": "font"
+            },
+            {
+                "file": "fonts/other_f_text.ttf",
+                "name": "OTHER_FONT_25",
+                "targetPlatforms": null,
+                "type": "font"
+            },
+            {
+                "file": "fonts/other_f_time.ttf",
+                "name": "OTHER_FONT_45",
+                "targetPlatforms": null,
+                "type": "font"
+            }
+        ]
+    },
+    "sdkVersion": "3",
+    "shortName": "SFClock",
+    "targetPlatforms": [
+        "basalt"
+    ],
+    "uuid": "406e0c51-ab25-4858-b94e-b53a0f6836fd",
+    "versionLabel": "1.5",
+    "watchapp": {
+        "watchface": true
+    }
+}
