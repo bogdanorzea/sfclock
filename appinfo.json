@@ -28,7 +28,7 @@
         "configurable"
     ],
     "companyName": "Bogdan Orzea",
-    "longName": "Straight Font Clock",
+    "longName": "sfclock for Pebble",
     "projectType": "native",
     "resources": {
         "media": [
@@ -53,7 +53,7 @@
         ]
     },
     "sdkVersion": "3",
-    "shortName": "SFClock",
+    "shortName": "sfclock",
     "targetPlatforms": [
         "basalt"
     ],
