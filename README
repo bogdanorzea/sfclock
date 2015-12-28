@@ -1,4 +1,4 @@
-sfclock for Pebble
+#sfclock for Pebble
 
 This is a customisable watchface for Pebble Time that displays time, date, weather, a custom text and a battery percent.
 
@@ -12,8 +12,7 @@ The font used is made by Nathan McArthur from http://www.dafont.com/other-f.font
 This project was made for CS50x 2015 Final Project by Bogdan Orzea. 
 
 
-Licence
--------
+##Licence
 
 Copyright (C) 2015 Bogdan Orzea
 
