@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Configuration page</title>
+  <link rel='stylesheet' type='text/css' href='/bower_components/pebble-slate/dist/css/slate.min.css'>
+  <link rel='stylesheet' type='text/css' href='/css/style.css'>
+</head>
+<body>
+  <div class='item-container'>
+    <h1 class='title'>SFClock<br>Configuration page</h1>
+  </div>
+
+  <div class="item-container">
+    <div class="item-container-header">Time settings</div>
+    <div class="item-container-content">
+      <label class='item'>
+        24-Hour format
+        <input id='timeFormatCheckbox' type='checkbox' class="item-toggle" checked="true">
+      </label>
+    </div>
+  </div>
+
+  <div class='item-container'>
+    <div class='item-container-header'>Appearance</div>
+    <div class='item-container-content'>
+      <label class='item'>
+        Background color
+        <input id='backgroundColorPicker' type='text' class='item-color item-color-sunny' value='#FFFFFF'>
+      </label>
+      <label class='item'>
+        Font color
+        <input id='fontColorPicker' type='text' class='item-color item-color-sunny' value='#000000'>
+      </label>
+    </div>
+  </div>
+
+  <div class="item-container">
+    <div class="item-container-header">Weather</div>
+    <div class="item-container-content">
+      <label class='item'>
+        Show weather info
+        <input id='weatherVisibleCheckbox' type='checkbox' class="item-toggle" checked="true">
+      </label>
+    </div>
+    <div class='item-container-footer'>
+      Weather info provided by OpenWeatherMap.org.
+    </div>
+  </div>
+
+  <div class="item-container">
+    <div class="item-container-header">Hourly vibration</div>
+    <div class="item-container-content">
+      <label class='item'>
+        Vibrate hourly
+        <input id='vibrateHourlyCheckbox' type='checkbox' class='item-toggle' checked="true">
+      </label>
+      <!--<label class="item">
+      Vibration style
+      <select id="vibrateHourlyStyleSelect" dir='rtl' class="item-select">
+        <option class="item-select-option" selected>Short pulse</option>
+        <option class="item-select-option">Long pulse</option>
+        <option class="item-select-option">Double pulse</option>
+      </select>
+    </label>
+  -->
+    <!--<label class="item">
+      Start interval
+      <input type="time" class="item-time" name="time-1" value="09:00">
+    </label>
+    <label class="item">
+      End interval
+      <input type="time" class="item-time" name="time-1" value="18:00">
+    </label>
+    <label class="item">
+      Start day
+      <input type="date" class="item-date" name="date-1" value="2015-02-12">
+    </label>
+        <label class="item">
+      End day
+      <input type="date" class="item-date" name="date-1" value="2015-02-12">
+    </label>
+    -->
+    </div>
+  </div>
+
+  <div class="item-container">
+    <div class="item-container-header">Bluetooth disconnect alert</div>
+    <div class="item-container-content">
+      <label class='item'>
+        Vibrate on disconnect
+        <input id='vibrateDisconnectCheckbox' type='checkbox' class='item-toggle' checked="true">
+      </label>
+      <label class='item'>
+        Visual alert on disconnect
+        <input id='visualDisconnectCheckbox' type='checkbox' class='item-toggle' checked="true">
+      </label>
+      <label class='item'>
+        Change background color
+      <input id='backgroundDisconnectColorPicker' type='text' class='item-color item-color-sunny' value='#FF0000'>
+      </label>
+      <label class='item'>
+        Change font color
+        <input id='fontDisconnectColorPicker' type='text' class='item-color item-color-sunny' value='#000000'>
+      </label>
+      <!--<label class="item">
+      Vibration style
+      <select id="vibrateDisconnectStyleSelect" dir='rtl' class="item-select">
+        <option class="item-select-option" selected>Short pulse</option>
+        <option class="item-select-option">Long pulse</option>
+        <option class="item-select-option">Double pulse</option>
+      </select>
+    </label>
+    
+
+    </div>
+  -->
+  </div>
+
+  <div class="item-container-header">Custom text</div>
+  <div class="item-container-content">
+    <label class='item'>
+      Show custom text
+      <input id='customTextVisibleCheckbox' type='checkbox' class='item-toggle'>
+    </label>
+    <label class="item">
+      <div class="item-input-wrapper">
+        <input id='customTextValueField' type="text" class="item-input" placeholder="Input field" value="This is CS50!">
+      </div>
+    </label>
+  </div>
+
+
+  <div class="item-container">
+    <div class="item-container-header">Battery settings</div>
+    <div class="item-container-content">
+      <label class='item'>
+        Show battery info
+        <input id='batteryVisibleCheckbox' type='checkbox' class='item-toggle' checked="true">
+      </label>
+      <!--<label class='item'>
+        Display as percentage (DISABLED)
+        <input id='batteryPercentCheckbox' type='checkbox' class='item-toggle' checked="true" disabled="true">
+      </label>-->
+      <!--<div class="item tab-buttons">
+        <a id="batteryProcentSelect" class="tab-button active">Procent</a>
+        <a id="batteryProgressBarSelect" class="tab-button">Progressbar</a>
+      </div>
+      -->
+    </div>
+  </div>
+
+  <div class='item-container'>
+    <div class='button-container'>
+      <input id='submitButton' type='button' class='item-button' value='SUBMIT'>
+    </div>
+  </div>
+  <div class='item-container-footer'>
+      This watchface was made for CS50x Final Project 2015 by Bogdan Orzea.
+  </div>
+
+  <script src='/bower_components/pebble-slate/dist/js/slate.min.js'></script>
+  <script src='/js/main.js'></script>
+</body>
+</html>
