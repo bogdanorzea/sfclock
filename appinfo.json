@@ -32,7 +32,16 @@
     "projectType": "native",
     "resources": {
         "media": [
-            {
+			{
+                "file": "images/menu_icon.png",
+                "memoryFormat": "2BitPalette",
+                "menuIcon": true,
+                "name": "MENU_ICON",
+                "storageFormat": "png",
+                "targetPlatforms": null,
+                "type": "bitmap"
+            },
+			{
                 "file": "fonts/other_f_text_small.ttf",
                 "name": "OTHER_FONT_20",
                 "targetPlatforms": null,

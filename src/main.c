@@ -18,19 +18,18 @@
   http-server
   ./ngrok http 8080
 
-// To run for Pebble SDK from: https://developer.getpebble.com/sdk/install/linux/
+// To use Pebble SDK. More on: https://developer.getpebble.com/sdk/install/linux/
   mkdir ~/pebble-dev/
   cd ~/pebble-dev/
   tar -zxf ~/Downloads/pebble-sdk-4.0-linux64.tar.bz2
   echo 'export PATH=~/pebble-dev/pebble-sdk-4.0-linux64/bin:$PATH' >> ~/.bash_profile
   . ~/.bash_profile
 
-// To run for Pebble SDK
+// To run build watchface
   pebble build
-  pebble install --emulator basalt // pebble install --phone 192.168.1.102
+  pebble install --emulator basalt /or/ pebble install --phone 192.168.1.102
   pebble logs --emulator basalt --color
   pebble emu-app-config --emulator basalt
-  pebble emu-bt-connection --connected no
 
 */
 
@@ -108,17 +107,11 @@ static void set_background_color(int color) {
 }
 static void set_text_color(int color) {
   GColor f_color = GColorFromHEX(color);
-  
   text_layer_set_text_color(s_time_layer, f_color);
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "DONE time");
   text_layer_set_text_color(s_day_layer, f_color);
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "DONE day");
   text_layer_set_text_color(s_weather_layer, f_color);
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "DONE weather");
   text_layer_set_text_color(s_custom_layer, f_color);
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "DONE custom");
   text_layer_set_text_color(s_battery_percent_layer, f_color);
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "DONE battery");
 }
 // Update time
 static void update_time() {
@@ -320,9 +313,7 @@ static void main_window_load(Window *window) {
   s_battery_percent_layer = text_layer_create(GRect(0, 132, 142, 29));
   text_layer_set_background_color(s_battery_percent_layer, font_background_color);
   text_layer_set_text_color(s_battery_percent_layer, GColorFromHEX(font_color));
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "DONE1");
   text_layer_set_text_color(s_battery_percent_layer, GColorFromHEX(font_color));
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "DONE2");
   text_layer_set_font(s_battery_percent_layer, text_small_font);
   text_layer_set_text_alignment(s_battery_percent_layer, GTextAlignmentRight);
   text_layer_set_text(s_battery_percent_layer, " ");
@@ -331,7 +322,6 @@ static void main_window_load(Window *window) {
   }
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_battery_percent_layer));
   text_layer_set_text_color(s_battery_percent_layer, GColorFromHEX(font_color));
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "DONE3");
 
   // DISABLED PROGRESSBAR
   // s_battery_layer = layer_create(GRect(6, 155, 132, 7));
@@ -377,10 +367,10 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
   static char temperature_buffer[8];
   static char conditions_buffer[32];
   static char weather_layer_buffer[32];
-  //static char custom_text_buffer[32];
+
   Tuple *temp_tuple = dict_find(iterator, KEY_TEMPERATURE);
   Tuple *conditions_tuple = dict_find(iterator, KEY_CONDITIONS);
-  // If all data is available, use it
+
   if(temp_tuple && conditions_tuple) {
     snprintf(temperature_buffer, sizeof(temperature_buffer), "%d°C", (int)temp_tuple->value->int32);
     snprintf(conditions_buffer, sizeof(conditions_buffer), "%s", conditions_tuple->value->cstring);
@@ -507,7 +497,8 @@ static void init() {
   window_set_window_handlers(s_main_window, (WindowHandlers) {.load = main_window_load,.unload = main_window_unload});
 
   // Show the Window on the watch, with animation
-  window_set_background_color(s_main_window, GColorFromHEX(background_color));
+  set_background_color(background_color);
+  
   #ifndef PBL_SDK_3
     window_set_fullscreen(s_window, true);
   #endif
