@@ -13,7 +13,7 @@
   sudo npm install -g http-server
   cd ./%WATCHFACE_FOLDER%/
   get ngrok from https://ngrok.com/ and extract to %WATCHFACE_FOLDER%
-  ./ngrok authtoken 6ECntJk9YXcTXuyWphydz_4FBg7uYSSLjVpxzHkzcY7
+  ./ngrok authtoken <ID>
   [bower install pebble-slate]
   http-server
   ./ngrok http 8080
@@ -332,9 +332,6 @@ static void main_window_load(Window *window) {
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_battery_percent_layer));
   text_layer_set_text_color(s_battery_percent_layer, GColorFromHEX(font_color));
   APP_LOG(APP_LOG_LEVEL_DEBUG, "DONE3");
-
-  
-
 
   // DISABLED PROGRESSBAR
   // s_battery_layer = layer_create(GRect(6, 155, 132, 7));

@@ -1320,7 +1320,7 @@ LOAD /home/bogdan/pebble-dev/pebble-sdk-4.0-linux64/arm-cs-tools/bin/../lib/gcc/
 .rel.dyn        0x00000000000013e4        0x0
  .rel.iplt      0x0000000000000000        0x0 /home/bogdan/pebble-dev/pebble-sdk-4.0-linux64/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtbegin.o
 
-.data           0x00000000000013e4       0x18
+.data           0x00000000000013e4       0x16
  *(.data)
  .data          0x00000000000013e4        0x0 /home/bogdan/pebble-dev/pebble-sdk-4.0-linux64/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crti.o
  .data          0x00000000000013e4        0x4 /home/bogdan/pebble-dev/pebble-sdk-4.0-linux64/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtbegin.o
@@ -1336,26 +1336,25 @@ LOAD /home/bogdan/pebble-dev/pebble-sdk-4.0-linux64/arm-cs-tools/bin/../lib/gcc/
  *fill*         0x00000000000013e9        0x3 
  .data.background_disconnect_color
                 0x00000000000013ec        0x4 src/main.c.7.o
- .data.custom_text_visible
-                0x00000000000013f0        0x1 src/main.c.7.o
- .data.vibrate_disconnect
-                0x00000000000013f1        0x1 src/main.c.7.o
- .data.vibrate_hourly
-                0x00000000000013f2        0x1 src/main.c.7.o
- .data.visual_disconnect
-                0x00000000000013f3        0x1 src/main.c.7.o
- .data.military_time
-                0x00000000000013f4        0x1 src/main.c.7.o
- .data.weather_visible
-                0x00000000000013f5        0x1 src/main.c.7.o
- *fill*         0x00000000000013f6        0x2 
  .data.background_color
-                0x00000000000013f8        0x4 src/main.c.7.o
+                0x00000000000013f0        0x4 src/main.c.7.o
+ .data.custom_text_visible
+                0x00000000000013f4        0x1 src/main.c.7.o
+ .data.vibrate_disconnect
+                0x00000000000013f5        0x1 src/main.c.7.o
+ .data.vibrate_hourly
+                0x00000000000013f6        0x1 src/main.c.7.o
+ .data.visual_disconnect
+                0x00000000000013f7        0x1 src/main.c.7.o
+ .data.military_time
+                0x00000000000013f8        0x1 src/main.c.7.o
+ .data.weather_visible
+                0x00000000000013f9        0x1 src/main.c.7.o
 
 .igot.plt       0x00000000000013fc        0x0
  .igot.plt      0x0000000000000000        0x0 /home/bogdan/pebble-dev/pebble-sdk-4.0-linux64/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtbegin.o
 
-.bss            0x00000000000013fc       0xbc
+.bss            0x00000000000013fc       0xb8
  *(.bss)
  *(.bss.*)
  .bss.text_font
@@ -1364,44 +1363,42 @@ LOAD /home/bogdan/pebble-dev/pebble-sdk-4.0-linux64/arm-cs-tools/bin/../lib/gcc/
                 0x0000000000001400        0x4 src/main.c.7.o
  .bss.s_weather_layer
                 0x0000000000001404        0x4 src/main.c.7.o
- .bss.weather_layer_buffer.7366
+ .bss.weather_layer_buffer.7365
                 0x0000000000001408       0x20 src/main.c.7.o
  .bss.font_background_color
                 0x0000000000001428        0x1 src/main.c.7.o
- *fill*         0x0000000000001429        0x3 
- .bss.s_battery_level
-                0x000000000000142c        0x4 src/main.c.7.o
- .bss.batt.7340
-                0x0000000000001430        0xb src/main.c.7.o
- *fill*         0x000000000000143b        0x1 
+ .bss.conditions_buffer.7364
+                0x0000000000001429       0x20 src/main.c.7.o
+ .bss.batt.7339
+                0x0000000000001449        0xb src/main.c.7.o
  .bss.s_main_window
-                0x000000000000143c        0x4 src/main.c.7.o
- .bss.conditions_buffer.7365
-                0x0000000000001440       0x20 src/main.c.7.o
+                0x0000000000001454        0x4 src/main.c.7.o
  .bss.s_time_layer
-                0x0000000000001460        0x4 src/main.c.7.o
+                0x0000000000001458        0x4 src/main.c.7.o
  .bss.custom_text_value
-                0x0000000000001464       0x20 src/main.c.7.o
+                0x000000000000145c       0x20 src/main.c.7.o
  .bss.font_disconnect_color
-                0x0000000000001484        0x4 src/main.c.7.o
+                0x000000000000147c        0x4 src/main.c.7.o
  .bss.time_font
-                0x0000000000001488        0x4 src/main.c.7.o
+                0x0000000000001480        0x4 src/main.c.7.o
  .bss.s_day_layer
-                0x000000000000148c        0x4 src/main.c.7.o
- .bss.time.7323
-                0x0000000000001490        0x6 src/main.c.7.o
- *fill*         0x0000000000001496        0x2 
+                0x0000000000001484        0x4 src/main.c.7.o
+ .bss.time.7322
+                0x0000000000001488        0x6 src/main.c.7.o
+ *fill*         0x000000000000148e        0x2 
  .bss.s_battery_percent_layer
-                0x0000000000001498        0x4 src/main.c.7.o
- .bss.weekday.7328
-                0x000000000000149c        0xb src/main.c.7.o
- *fill*         0x00000000000014a7        0x1 
+                0x0000000000001490        0x4 src/main.c.7.o
+ .bss.weekday.7327
+                0x0000000000001494        0xb src/main.c.7.o
+ *fill*         0x000000000000149f        0x1 
+ .bss.s_battery_level
+                0x00000000000014a0        0x4 src/main.c.7.o
  .bss.font_color
-                0x00000000000014a8        0x4 src/main.c.7.o
- .bss.temperature_buffer.7364
-                0x00000000000014ac        0x8 src/main.c.7.o
+                0x00000000000014a4        0x4 src/main.c.7.o
+ .bss.temperature_buffer.7363
+                0x00000000000014a8        0x8 src/main.c.7.o
  .bss.s_custom_layer
-                0x00000000000014b4        0x4 src/main.c.7.o
+                0x00000000000014b0        0x4 src/main.c.7.o
 
 DISCARD
  libc.a(*)
@@ -1434,9 +1431,9 @@ OUTPUT(/home/bogdan/Dropbox/CS50/project/sfclock/build/basalt/pebble-app.elf elf
  .comment       0x0000000000000000       0x4f basalt/appinfo.auto.c.7.o
  .comment       0x0000000000000000       0x4f /home/bogdan/pebble-dev/pebble-sdk-4.0-linux64/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtend.o
 
-.debug_info     0x0000000000000000     0x24fb
- .debug_info    0x0000000000000000     0x21bb src/main.c.7.o
- .debug_info    0x00000000000021bb      0x340 basalt/appinfo.auto.c.7.o
+.debug_info     0x0000000000000000     0x24ef
+ .debug_info    0x0000000000000000     0x21af src/main.c.7.o
+ .debug_info    0x00000000000021af      0x340 basalt/appinfo.auto.c.7.o
 
 .debug_abbrev   0x0000000000000000      0x470
  .debug_abbrev  0x0000000000000000      0x3d2 src/main.c.7.o
@@ -1458,10 +1455,10 @@ OUTPUT(/home/bogdan/Dropbox/CS50/project/sfclock/build/basalt/pebble-app.elf elf
  .debug_line    0x0000000000000000      0x4d1 src/main.c.7.o
  .debug_line    0x00000000000004d1      0x143 basalt/appinfo.auto.c.7.o
 
-.debug_str      0x0000000000000000     0x10c8
- .debug_str     0x0000000000000000      0xeaf src/main.c.7.o
-                                       0x1057 (size before relaxing)
- .debug_str     0x0000000000000eaf      0x219 basalt/appinfo.auto.c.7.o
+.debug_str      0x0000000000000000     0x10b8
+ .debug_str     0x0000000000000000      0xe9f src/main.c.7.o
+                                       0x1047 (size before relaxing)
+ .debug_str     0x0000000000000e9f      0x219 basalt/appinfo.auto.c.7.o
                                         0x386 (size before relaxing)
 
 .debug_frame    0x0000000000000000      0x160
