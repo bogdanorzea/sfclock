@@ -2,7 +2,7 @@
     "appKeys": {
         "KEY_BACKGROUND_COLOR": 3,
         "KEY_BACKGROUND_DISCONNECT_COLOR": 5,
-        "KEY_BATTERY_PERCENT": 9,
+        "KEY_BATTERY_TYPE": 9,
         "KEY_BATTERY_VISIBLE": 8,
         "KEY_CONDITIONS": 1,
         "KEY_CUSTOM_TEXT_VISIBLE": 18,
@@ -15,10 +15,10 @@
         "KEY_VIBRATE_DISCONNECT_STYLE": 17,
         "KEY_VIBRATE_HOURLY": 10,
         "KEY_VIBRATE_HOURLY_STYLE": 15,
-        "KEY_VIBRATE_MAX_DAY": 14,
-        "KEY_VIBRATE_MAX_TIME": 12,
-        "KEY_VIBRATE_MIN_DAY": 13,
-        "KEY_VIBRATE_MIN_TIME": 11,
+        "KEY_VIBRATE_END_DAY": 14,
+        "KEY_VIBRATE_END_TIME": 12,
+        "KEY_VIBRATE_START_DAY": 13,
+        "KEY_VIBRATE_START_TIME": 11,
         "KEY_VISUAL_DISCONNECT": 20,
         "KEY_WEATHER_VISIBLE": 2
 
@@ -42,19 +42,19 @@
                 "type": "bitmap"
             },
 			{
-                "file": "fonts/other_f_text_small.ttf",
+                "file": "fonts/other_f.ttf",
                 "name": "OTHER_FONT_20",
                 "targetPlatforms": null,
                 "type": "font"
             },
             {
-                "file": "fonts/other_f_text.ttf",
+                "file": "fonts/other_f.ttf",
                 "name": "OTHER_FONT_25",
                 "targetPlatforms": null,
                 "type": "font"
             },
             {
-                "file": "fonts/other_f_time.ttf",
+                "file": "fonts/other_f.ttf",
                 "name": "OTHER_FONT_45",
                 "targetPlatforms": null,
                 "type": "font"
@@ -67,7 +67,7 @@
         "basalt"
     ],
     "uuid": "406e0c51-ab25-4858-b94e-b53a0f6836fd",
-    "versionLabel": "1.5",
+    "versionLabel": "1.6",
     "watchapp": {
         "watchface": true
     }

@@ -17,7 +17,7 @@ function locationSuccess(pos) {
   // Construct URL
   var url = "http://api.openweathermap.org/data/2.5/weather?lat=" +
       pos.coords.latitude + "&lon=" + pos.coords.longitude + '&appid=' + myAPIKey;
-  console.log("lat=" + pos.coords.latitude + "&lon=" + pos.coords.longitude);
+  // console.log("lat=" + pos.coords.latitude + "&lon=" + pos.coords.longitude);
   // Send request to OpenWeatherMap
   xhrRequest(url, 'GET', 
     function(responseText) {
@@ -26,11 +26,11 @@ function locationSuccess(pos) {
 
       // Temperature in Kelvin requires adjustment
       var temperature = Math.round(json.main.temp - 273.15);
-      console.log("Temperature is " + temperature);
+      // console.log("Temperature is " + temperature);
 
       // Conditions
       var conditions = json.weather[0].main;      
-      console.log("Conditions are " + conditions);
+      // console.log("Conditions are " + conditions);
       
       // Assemble dictionary using our keys
       var dictionary = {
@@ -41,17 +41,17 @@ function locationSuccess(pos) {
       // Send to Pebble
       Pebble.sendAppMessage(dictionary,
         function(e) {
-          console.log("Weather info sent to Pebble successfully!");
+          // console.log("Weather info sent to Pebble successfully!");
         },
         function(e) {
-          console.log("Error sending weather info to Pebble!");
+          // console.log("Error sending weather info to Pebble!");
         }
       );
     }      
   );
 }
 function locationError(err) {
-  console.log("Error requesting location!");
+  // console.log("Error requesting location!");
 }
 function getWeather() {
   navigator.geolocation.getCurrentPosition(
@@ -62,13 +62,13 @@ function getWeather() {
 }
 // Listen for when the watchface is opened
 Pebble.addEventListener('ready', function(e) {
-    console.log("PebbleKit JS ready!");
+    // console.log("PebbleKit JS ready!");
     // Get the initial weather
     getWeather();
   });
 // Listen for when an AppMessage is received
 Pebble.addEventListener('appmessage', function(e) {
-    console.log("AppMessage received!");
+    // console.log("AppMessage received!");
     getWeather();
   });                   
 
@@ -81,39 +81,38 @@ Pebble.addEventListener('appmessage', function(e) {
 
 Pebble.addEventListener('showConfiguration', function() {
   var url = 'http://bogdanorzea.github.io/sfclock/index.html';
-  console.log('Showing configuration page: ' + url);
+  // console.log('Showing configuration page: ' + url);
   Pebble.openURL(url);
 });
 
 Pebble.addEventListener('webviewclosed', function(e) {
   var configData = JSON.parse(decodeURIComponent(e.response));
-  console.log('Configuration page returned: ' + JSON.stringify(configData));
+  // console.log('Configuration page returned: ' + JSON.stringify(configData));
   if (configData.backgroundColor) {
-    Pebble.sendAppMessage({
-      "KEY_MILITARY_TIME": configData.twentyFourHourFormat,
+    Pebble.sendAppMessage(
+{      "KEY_MILITARY_TIME": configData.twentyFourHourFormat,
       "KEY_BACKGROUND_COLOR" : parseInt(configData.backgroundColor, 16),
       "KEY_FONT_COLOR": parseInt(configData.fontColor, 16),
+      "KEY_WEATHER_VISIBLE" : configData.weatherVisible,
+      "KEY_VIBRATE_HOURLY": configData.vibrateHourly,
+      "KEY_VIBRATE_HOURLY_STYLE": configData.vibrateHourlyStyle,
+      "KEY_VIBRATE_START_TIME": configData.vibrateStartTime,
+      "KEY_VIBRATE_END_TIME": configData.vibrateEndTime,
+      "KEY_VIBRATE_START_DAY": configData.vibrateStartDay,
+      "KEY_VIBRATE_END_DAY": configData.vibrateEndDay,
+      "KEY_VIBRATE_DISCONNECT": configData.vibrateDissconnect,
+      "KEY_VIBRATE_DISCONNECT_STYLE": configData.vibrateDisconnectStyle,
+      "KEY_VISUAL_DISCONNECT": configData.visualDisconnect,
       "KEY_BACKGROUND_DISCONNECT_COLOR": parseInt(configData.backgroundDisconnectColor, 16),
       "KEY_FONT_DISCONNECT_COLOR": parseInt(configData.fontDisconnectColor, 16),
-      "KEY_WEATHER_VISIBLE" : configData.weatherVisible,
       "KEY_BATTERY_VISIBLE": configData.batteryVisible,
-      "KEY_VIBRATE_HOURLY": configData.vibrateHourly,
+      "KEY_BATTERY_TYPE": configData.batterType,
       "KEY_CUSTOM_TEXT_VISIBLE": configData.customTextVisible,
-      "KEY_CUSTOM_TEXT_VALUE": configData.customTextValue,
-      "KEY_VIBRATE_DISCONNECT": configData.vibrateDissconnect,
-      "KEY_VISUAL_DISCONNECT": configData.visualDisconnect
-      
-      //"KEY_BATTERY_PERCENT": configData.batteryPercent,
-      // "KEY_VIBRATION_MIN_TIME": null,
-      // "KEY_VIBRATION_MAX_TIME": null,
-      // "KEY_VIBRATION_MIN_DAY": null,
-      // "KEY_VIBRATION_MAX_DAY": null,
-      // "KEY_VIBRATION_HOURLY_STYLE": null,
-      // "KEY_VIBRATION_DISCONNECT_STYLE": null,
+      "KEY_CUSTOM_TEXT_VALUE": configData.customTextValue
     }, function() {
-      console.log('Send successful!');
+      // console.log('Send successful!');
     }, function() {
-      console.log('Send failed!');
+      // console.log('Send failed!');
     });
   }
 });
