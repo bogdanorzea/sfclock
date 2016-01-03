@@ -35,27 +35,25 @@ function loadOptions() {
   
   // console.log('Existing options: ' + JSON.stringify(localStorage));
 
-  if (localStorage.twentyFourHourFormat) {
-    $timeFormatCheckbox[0].checked = localStorage.twentyFourHourFormat === 'true';
-    $backgroundColorPicker[0].value = localStorage.backgroundColor;  
-    $fontColorPicker[0].value = localStorage.fontColor;
-    $backgroundDisconnectColorPicker[0].value = localStorage.backgroundDisconnectColor;
-    $fontDisconnectColorPicker[0].value = localStorage.fontDisconnectColor;
-    $weatherVisibleCheckbox[0].checked = localStorage.weatherVisible === 'true';
-    $vibrateHourlyCheckbox[0].checked = localStorage.vibrateHourly === 'true';
-    $vibrateHourlyStyleSelect[0].value = getVibrateString(localStorage.vibrateHourlyStyle);
-    $vibrateStartTimeSelect[0].value = getHourString(localStorage.vibrateStartTime);
-    $vibrateEndTimeSelect[0].value = getHourString(localStorage.vibrateEndTime);
-    $vibrateStartDaySelect[0].value = getDayString(localStorage.vibrateStartDay);
-    $vibrateEndDaySelect[0].value = getDayString(localStorage.vibrateEndDay);
-    $vibrateDisconnectCheckbox[0].checked = localStorage.vibrateDisconnect === 'true';
-    $vibrateDisconnectStyleSelect[0].value = getVibrateString(localStorage.vibrateDisconnectStyle);
-    $visualDisconnectCheckbox[0].checked = localStorage.visualDisconnect === 'true';
-    $batteryVisibleCheckbox[0].checked = localStorage.batteryVisible === 'true';
-    $batteryTypeSelect[0].value = getBatteryString(localStorage.batteryType);
-    $customTextVisibleCheckbox[0].checked = localStorage.customTextVisible === 'true';
-    $customTextValueField[0].value = localStorage.customTextValue;
-  }
+  if (localStorage.twentyFourHourFormat) {$timeFormatCheckbox[0].checked = localStorage.twentyFourHourFormat === 'true';};
+  if (localStorage.backgroundColor) {$backgroundColorPicker[0].value = localStorage.backgroundColor;};
+  if (localStorage.fontColor) {$fontColorPicker[0].value = localStorage.fontColor;};
+  if (localStorage.backgroundDisconnectColor) {$backgroundDisconnectColorPicker[0].value = localStorage.backgroundDisconnectColor;};
+  if (localStorage.fontDisconnectColor) {$fontDisconnectColorPicker[0].value = localStorage.fontDisconnectColor;};
+  if (localStorage.weatherVisible) {$weatherVisibleCheckbox[0].checked = localStorage.weatherVisible === 'true';};
+  if (localStorage.vibrateHourly) {$vibrateHourlyCheckbox[0].checked = localStorage.vibrateHourly === 'true';};
+  if (localStorage.vibrateHourlyStyle) {$vibrateHourlyStyleSelect[0].value = getVibrateString(localStorage.vibrateHourlyStyle);};
+  if (localStorage.vibrateStartTime) {$vibrateStartTimeSelect[0].value = getHourString(localStorage.vibrateStartTime);};
+  if (localStorage.vibrateEndTime) {$vibrateEndTimeSelect[0].value = getHourString(localStorage.vibrateEndTime);};
+  if (localStorage.vibrateStartDay) {$vibrateStartDaySelect[0].value = getDayString(localStorage.vibrateStartDay);};
+  if (localStorage.vibrateEndDay) {$vibrateEndDaySelect[0].value = getDayString(localStorage.vibrateEndDay);};
+  if (localStorage.vibrateDisconnect) {$vibrateDisconnectCheckbox[0].checked = localStorage.vibrateDisconnect === 'true';};
+  if (localStorage.vibrateDisconnectStyle) {$vibrateDisconnectStyleSelect[0].value = getVibrateString(localStorage.vibrateDisconnectStyle);};
+  if (localStorage.visualDisconnect) {$visualDisconnectCheckbox[0].checked = localStorage.visualDisconnect === 'true';};
+  if (localStorage.batteryVisible) {$batteryVisibleCheckbox[0].checked = localStorage.batteryVisible === 'true';};
+  if (localStorage.batteryType) {$batteryTypeSelect[0].value = getBatteryString(localStorage.batteryType);};
+  if (localStorage.customTextVisible) {$customTextVisibleCheckbox[0].checked = localStorage.customTextVisible === 'true';};
+  if (localStorage.customTextValue) {$customTextValueField[0].value = localStorage.customTextValue;}
 }
 
 function getAndStoreConfigData() {
