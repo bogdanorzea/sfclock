@@ -20,7 +20,8 @@
         "KEY_VIBRATE_START_DAY": 13,
         "KEY_VIBRATE_START_TIME": 11,
         "KEY_VISUAL_DISCONNECT": 20,
-        "KEY_WEATHER_VISIBLE": 2
+        "KEY_WEATHER_VISIBLE": 2,
+        "KEY_WEATHER_TEXT": 21
 
     },
     "capabilities": [
@@ -67,7 +68,7 @@
         "basalt"
     ],
     "uuid": "406e0c51-ab25-4858-b94e-b53a0f6836fd",
-    "versionLabel": "1.6",
+    "versionLabel": "1.7",
     "watchapp": {
         "watchface": true
     }

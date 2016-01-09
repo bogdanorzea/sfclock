@@ -30,6 +30,10 @@
   pebble install --emulator basalt /or/ pebble install --phone 192.168.1.102
   pebble logs --emulator basalt --color
   pebble emu-app-config --emulator basalt
+  pebble emu-battery --emulator basalt --percent 100 --charging
+  pebble emu-battery --emulator basalt --percent 100
+  pebble emu-bt-connection --emulator basalt --connected yes / no
+  pebble emu-bt-connection --emulator basalt --connected no
 
 */
 
@@ -60,6 +64,7 @@
 #define KEY_CUSTOM_TEXT_VISIBLE 18
 #define KEY_CUSTOM_TEXT_VALUE 19
 #define KEY_VISUAL_DISCONNECT 20
+#define KEY_WEATHER_TEXT 21   
 
 // Global variables declaration
 static Window *s_main_window;
@@ -79,11 +84,11 @@ static int background_disconnect_color = 0xFF0000;
 static int font_disconnect_color = 0x000000;
 static bool military_time = 1;
 static bool weather_visible = true;
+static char weather_text[32];
 static bool custom_text_visible = true;
 static char custom_text_value[32];
 static bool battery_visible = true;
 static bool battery_type = 1;
-static int s_battery_level;
 static bool vibrate_hourly = true;
 static bool vibrate_disconnect = true;
 static int vibrate_start_time = 9;
@@ -131,42 +136,34 @@ static void update_time() {
     strftime(time, sizeof(time), "%I:%M", tick_time);
   }
   text_layer_set_text(s_time_layer, time);
+
   
   /*
    * Conditions below try to solve the cases when start is greater than end for hourly vibration intervals (both hour and days)
    */
 
   // Checks if time is on the hour and vibrate_hourly is active
-  if (vibrate_hourly && tick_time->tm_min == 0 && tick_time->tm_sec == 0) {
-    if (vibrate_start_day <= vibrate_end_day){
-      // Executes if vibrate_start_day is less or equal than vibrate_end_day
-      if(tick_time->tm_wday >= vibrate_start_day && tick_time->tm_wday <= vibrate_end_day) {
-        if (vibrate_start_day <= vibrate_end_day){
-          // Executes if vibrate_start_time is less or equal than vibrate_end_time
-          if (tick_time->tm_hour >= vibrate_start_time && tick_time->tm_hour <= vibrate_end_time) {
-            emit_vibration(vibrate_hourly_style);
-          }
-        } else {
-          // Executes if vibrate_start_time is greater than vibrate_end_time
-          if (tick_time->tm_hour >= vibrate_start_time || tick_time->tm_hour <= vibrate_end_time) {
-            emit_vibration(vibrate_hourly_style);
-          }
-        }
+  if (vibrate_hourly) {
+    // Triggers if vibrate_start_day < vibrate_end_day
+    if (vibrate_start_day <= vibrate_end_day && tick_time->tm_wday >= vibrate_start_day && tick_time->tm_wday <= vibrate_end_day) {
+      // Triggers if vibrate_start_time < vibrate_end_time
+      if (vibrate_start_time <= vibrate_end_time && tick_time->tm_hour >= vibrate_start_time && tick_time->tm_hour <= vibrate_end_time) {
+        emit_vibration(vibrate_hourly_style);
       }
-    } else {
-      // Executes if vibrate_start_day is greater than vibrate_end_day
-      if(tick_time->tm_wday >= vibrate_start_day || tick_time->tm_wday <= vibrate_end_day) {
-        if (vibrate_start_day <= vibrate_end_day){
-          // Executes if vibrate_start_time is less or equal than vibrate_end_time
-          if (tick_time->tm_hour >= vibrate_start_time && tick_time->tm_hour <= vibrate_end_time) {
-            emit_vibration(vibrate_hourly_style);
-          }
-        } else {
-          // Executes if vibrate_start_time is greater than vibrate_end_time
-          if (tick_time->tm_hour >= vibrate_start_time || tick_time->tm_hour <= vibrate_end_time) {
-            emit_vibration(vibrate_hourly_style);
-          }
-        }
+      // Triggers if vibrate_start_time > vibrate_end_time
+      else if (vibrate_start_time > vibrate_end_time && (tick_time->tm_hour >= vibrate_start_time || tick_time->tm_hour <= vibrate_end_time)) {
+        emit_vibration(vibrate_hourly_style);
+      }
+    }
+    // Triggers if vibrate_start_day > vibrate_end_day
+    else if (vibrate_start_day > vibrate_end_day && (tick_time->tm_wday >= vibrate_start_day || tick_time->tm_wday <= vibrate_end_day)) {
+      // Triggers if vibrate_start_time < vibrate_end_time
+      if (vibrate_start_time <= vibrate_end_time && tick_time->tm_hour >= vibrate_start_time && tick_time->tm_hour <= vibrate_end_time) {
+        emit_vibration(vibrate_hourly_style);
+      }
+      // Triggers if vibrate_start_time > vibrate_end_time
+      else if (vibrate_start_time > vibrate_end_time && (tick_time->tm_hour >= vibrate_start_time || tick_time->tm_hour <= vibrate_end_time)) {
+        emit_vibration(vibrate_hourly_style);
       }
     }
   }
@@ -188,6 +185,8 @@ static void update_time() {
     // Send the message!
     app_message_outbox_send();
   }
+
+  //free(tick_time);
 }
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
   update_time();
@@ -210,13 +209,16 @@ static void bt_handler(bool connected) {
   }
 }
 // Update battery
-static void battery_callback(BatteryChargeState state) {
-  // Record the new battery level
-  s_battery_level = state.charge_percent;
+static void battery_handler(BatteryChargeState state) {
+  // Update s_battery_percent_layer with battery info
   text_layer_set_text(s_battery_percent_layer, " ");
   if (battery_visible) {
-    static char batt[11];
-    snprintf(batt, sizeof(batt), "Batt: %i%%", (int)s_battery_level);
+      static char batt[12];
+      if (state.is_charging) {
+        snprintf(batt, sizeof(batt), "Charging...");
+      } else {
+        snprintf(batt, sizeof(batt), "Batt: %i%%", (int)state.charge_percent);
+      }
     text_layer_set_text(s_battery_percent_layer, batt);
   }
 
@@ -323,6 +325,12 @@ static void main_window_load(Window *window) {
     vibrate_disconnect_style = persist_read_int(KEY_VIBRATE_DISCONNECT_STYLE);
    // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Vibrate disconnect style %i", vibrate_disconnect_style);
   }
+  if (persist_exists(KEY_WEATHER_TEXT)) {
+    persist_read_string(KEY_WEATHER_TEXT, weather_text, sizeof(weather_text));
+   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Custom text value is '%s'", custom_text_value);
+  } else {
+    snprintf(weather_text, sizeof(weather_text), "%s", "Loading...");
+  }
 
   //Setting the UX
   time_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_OTHER_FONT_45));
@@ -353,7 +361,7 @@ static void main_window_load(Window *window) {
   text_layer_set_text_alignment(s_weather_layer, GTextAlignmentRight);
   text_layer_set_text(s_weather_layer, " ");
   if (weather_visible) {
-    text_layer_set_text(s_weather_layer, "Loading...");
+    text_layer_set_text(s_weather_layer, weather_text);
   }
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_weather_layer));
   
@@ -404,10 +412,11 @@ static void main_window_load(Window *window) {
   // }
   
 
+
   //Call updates
+  update_time();
   bt_handler(bluetooth_connection_service_peek());
-  update_time();  
-  battery_callback(battery_state_service_peek());
+  battery_handler(battery_state_service_peek());
 }
 // Unload main window
 static void main_window_unload(Window *window) {
@@ -427,7 +436,6 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
   // Read weather data
   static char temperature_buffer[8];
   static char conditions_buffer[32];
-  static char weather_layer_buffer[32];
 
   Tuple *temp_tuple = dict_find(iterator, KEY_TEMPERATURE);
   Tuple *conditions_tuple = dict_find(iterator, KEY_CONDITIONS);
@@ -435,10 +443,11 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
   if(temp_tuple && conditions_tuple) {
     snprintf(temperature_buffer, sizeof(temperature_buffer), "%d°C", (int)temp_tuple->value->int32);
     snprintf(conditions_buffer, sizeof(conditions_buffer), "%s", conditions_tuple->value->cstring);
-    snprintf(weather_layer_buffer, sizeof(weather_layer_buffer), "%s, %s", temperature_buffer, conditions_buffer);
+    snprintf(weather_text, sizeof(weather_text), "%s, %s", temperature_buffer, conditions_buffer);
+    persist_write_string(KEY_WEATHER_TEXT, weather_text);
     text_layer_set_text(s_weather_layer, " ");
     if (weather_visible) {
-      text_layer_set_text(s_weather_layer, weather_layer_buffer);
+      text_layer_set_text(s_weather_layer, weather_text);
     }
   }
   
@@ -498,7 +507,7 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
     persist_write_bool(KEY_WEATHER_VISIBLE, weather_visible);
     text_layer_set_text(s_weather_layer, " ");
     if (weather_visible) {
-      text_layer_set_text(s_weather_layer, weather_layer_buffer);
+      text_layer_set_text(s_weather_layer, weather_text);
     }
     // APP_LOG(APP_LOG_LEVEL_DEBUG, "Weather visibility is %i", weather_visible);
   }
@@ -512,7 +521,7 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
     persist_write_bool(KEY_BATTERY_TYPE, battery_type);
     // APP_LOG(APP_LOG_LEVEL_DEBUG, "Battery type is %i (0 for progressbar, 1 for percentage)", battery_type);
   }
-  battery_callback(battery_state_service_peek());
+  battery_handler(battery_state_service_peek());
   if (temp_vibrate_hourly) {
     vibrate_hourly = temp_vibrate_hourly->value->int8;
     persist_write_bool(KEY_VIBRATE_HOURLY, vibrate_hourly);
@@ -610,7 +619,8 @@ static void init() {
   // Register with Services
   tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
   bluetooth_connection_service_subscribe(bt_handler);
-    
+  battery_state_service_subscribe(battery_handler);
+  
   // Register callbacks
   app_message_register_inbox_received(inbox_received_callback);
   app_message_register_inbox_dropped(inbox_dropped_callback);
@@ -621,7 +631,11 @@ static void init() {
   app_message_open(app_message_inbox_size_maximum(), app_message_outbox_size_maximum());
 }
 static void deinit() {
-    // Destroy Window
+    tick_timer_service_unsubscribe();
+    bluetooth_connection_service_unsubscribe();
+    battery_state_service_unsubscribe();
+    app_message_deregister_callbacks(); 
+
     window_destroy(s_main_window);
 }
 int main(void) {
