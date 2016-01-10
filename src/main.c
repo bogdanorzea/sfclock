@@ -143,7 +143,7 @@ static void update_time() {
    */
 
   // Checks if time is on the hour and vibrate_hourly is active
-  if (vibrate_hourly) {
+  if (vibrate_hourly && tick_time->tm_sec == 0 && tick_time->tm_min == 0) {
     // Triggers if vibrate_start_day < vibrate_end_day
     if (vibrate_start_day <= vibrate_end_day && tick_time->tm_wday >= vibrate_start_day && tick_time->tm_wday <= vibrate_end_day) {
       // Triggers if vibrate_start_time < vibrate_end_time
