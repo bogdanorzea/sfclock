@@ -22,7 +22,7 @@
   mkdir ~/pebble-dev/
   cd ~/pebble-dev/
   tar -zxf ~/Downloads/pebble-sdk-4.0-linux64.tar.bz2
-  echo 'export PATH=~/pebble-dev/pebble-sdk-4.0-linux64/bin:$PATH' >> ~/.bash_profile
+  echo 'export PATH=~/pebble-dev/pebble-sdk-4.0.1-linux64/bin:$PATH' >> ~/.bash_profile
   . ~/.bash_profile
 
 // To run build watchface
@@ -253,84 +253,85 @@ static void main_window_load(Window *window) {
   //// COMPLETE HERE WITH VALUE THAT ARE READ FROM THE PERSISTENT MEMORY
   if (persist_exists(KEY_MILITARY_TIME)) {
     military_time = persist_read_bool(KEY_MILITARY_TIME);
-   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Military time is %d", military_time);
   }
   if (persist_exists(KEY_FONT_COLOR)) {
     font_color = persist_read_int(KEY_FONT_COLOR);
-   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Font color is 0x%06x", font_color);
   }
   if (persist_exists(KEY_BACKGROUND_DISCONNECT_COLOR)) {
     background_disconnect_color = persist_read_int(KEY_BACKGROUND_DISCONNECT_COLOR);
-   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Background disconnect color is 0x%06x", background_disconnect_color);
   }
   if (persist_exists(KEY_FONT_DISCONNECT_COLOR)) {
     font_disconnect_color = persist_read_int(KEY_FONT_DISCONNECT_COLOR);
-   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Font disconnect color is 0x%06x", font_color);
   }
   if (persist_exists(KEY_BATTERY_VISIBLE)) {
     battery_visible = persist_read_bool(KEY_BATTERY_VISIBLE);
-   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Battery visibility is %i", battery_visible);
   }
   if (persist_exists(KEY_BATTERY_TYPE)) {
     battery_type = persist_read_bool(KEY_BATTERY_TYPE);
-   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Battery type is %i", battery_type);
   }
   if (persist_exists(KEY_WEATHER_VISIBLE)) {
     weather_visible = persist_read_bool(KEY_WEATHER_VISIBLE);
-   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Weather visibility is %i", weather_visible);
   }
   if (persist_exists(KEY_VIBRATE_HOURLY)) {
     vibrate_hourly = persist_read_bool(KEY_VIBRATE_HOURLY);
-   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Vibrate hourly is %i", vibrate_hourly);
   }
   if (persist_exists(KEY_VIBRATE_DISCONNECT)) {
     vibrate_disconnect = persist_read_bool(KEY_VIBRATE_DISCONNECT);
-   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Vibrate disconnect is %i", vibrate_disconnect);
   }
   if (persist_exists(KEY_VISUAL_DISCONNECT)) {
     visual_disconnect = persist_read_bool(KEY_VISUAL_DISCONNECT);
-   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Visual alert is %i", visual_disconnect);
   }
   if (persist_exists(KEY_CUSTOM_TEXT_VISIBLE)) {
     custom_text_visible = persist_read_bool(KEY_CUSTOM_TEXT_VISIBLE);
-   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Custom text visibility is %i", custom_text_visible);
   }
   if (persist_exists(KEY_CUSTOM_TEXT_VALUE)) {
     persist_read_string(KEY_CUSTOM_TEXT_VALUE, custom_text_value, sizeof(custom_text_value));
-   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Custom text value is '%s'", custom_text_value);
   } else {
     snprintf(custom_text_value, sizeof(custom_text_value), "%s", "This is CS50!");
   }
   if (persist_exists(KEY_VIBRATE_START_TIME)) {
     vibrate_start_time = persist_read_int(KEY_VIBRATE_START_TIME);
-   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Vibrate start time is %i", vibrate_start_time);
   }
   if (persist_exists(KEY_VIBRATE_END_TIME)) {
     vibrate_end_time = persist_read_int(KEY_VIBRATE_END_TIME);
-   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Vibrate end time is %i", vibrate_end_time);
   }
   if (persist_exists(KEY_VIBRATE_START_DAY)) {
     vibrate_start_day = persist_read_int(KEY_VIBRATE_START_DAY);
-   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Vibrate start day is %i", vibrate_start_day);
   }
   if (persist_exists(KEY_VIBRATE_END_DAY)) {
-    vibrate_end_time = persist_read_int(KEY_VIBRATE_END_DAY);
-   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Vibrate end day is %i", vibrate_end_day);
+    vibrate_end_day = persist_read_int(KEY_VIBRATE_END_DAY);
   }
   if (persist_exists(KEY_VIBRATE_HOURLY_STYLE)) {
     vibrate_hourly_style = persist_read_int(KEY_VIBRATE_HOURLY_STYLE);
-   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Vibrate hourly style %i", vibrate_hourly_style);
   }
   if (persist_exists(KEY_VIBRATE_DISCONNECT_STYLE)) {
     vibrate_disconnect_style = persist_read_int(KEY_VIBRATE_DISCONNECT_STYLE);
-   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Vibrate disconnect style %i", vibrate_disconnect_style);
   }
   if (persist_exists(KEY_WEATHER_TEXT)) {
     persist_read_string(KEY_WEATHER_TEXT, weather_text, sizeof(weather_text));
-   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Custom text value is '%s'", custom_text_value);
   } else {
     snprintf(weather_text, sizeof(weather_text), "%s", "Loading...");
   }
+   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Military time is %d", military_time);
+   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Font color is 0x%06x", font_color);
+   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Background disconnect color is 0x%06x", background_disconnect_color);
+   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Font disconnect color is 0x%06x", font_color);
+   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Battery visibility is %i", battery_visible);
+   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Battery type is %i", battery_type);
+   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Weather visibility is %i", weather_visible);
+   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Vibrate hourly is %i", vibrate_hourly);
+   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Vibrate disconnect is %i", vibrate_disconnect);
+   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Visual disconnect is %i", visual_disconnect);
+   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Custom text visibility is %i", custom_text_visible);
+   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Custom text value is '%s'", custom_text_value);
+   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Vibrate start time is %i", vibrate_start_time);
+   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Vibrate end time is %i", vibrate_end_time);
+   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Vibrate start day is %i", vibrate_start_day);
+   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Vibrate end day is %i", vibrate_end_day);
+   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Vibrate hourly style %i", vibrate_hourly_style);
+   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Vibrate disconnect style %i", vibrate_disconnect_style);
+   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Custom text value is '%s'", custom_text_value);
+   // APP_LOG(APP_LOG_LEVEL_DEBUG, "PersistentStorage: Weather text value is '%s'", weather_text);
 
   //Setting the UX
   time_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_OTHER_FONT_45));
@@ -410,8 +411,6 @@ static void main_window_load(Window *window) {
   //   text_layer_set_text(s_battery_percent_layer, " ");
   //   layer_set_hidden(s_battery_layer, true);
   // }
-  
-
 
   //Call updates
   update_time();
