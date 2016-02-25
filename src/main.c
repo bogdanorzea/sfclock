@@ -18,11 +18,10 @@
   http-server
   ./ngrok http 8080
 
-// To use Pebble SDK. More on: https://developer.getpebble.com/sdk/install/linux/
-  mkdir ~/pebble-dev/
-  cd ~/pebble-dev/
-  tar -zxf ~/Downloads/pebble-sdk-4.0-linux64.tar.bz2
-  echo 'export PATH=~/pebble-dev/pebble-sdk-4.0.1-linux64/bin:$PATH' >> ~/.bash_profile
+// To install the SDK go to : https://developer.getpebble.com/sdk/install/linux/
+
+// Shell config
+  echo 'export PATH=~/pebble-dev/pebble-sdk-4.1.1-linux64/bin:$PATH' >> ~/.bash_profile
   . ~/.bash_profile
 
 // To run build watchface
